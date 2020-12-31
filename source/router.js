@@ -32,19 +32,24 @@ class Router {
     let stock = this.stack;
     return async function (ctx, next) {
       let currentPath = ctx.url;
-      let route;
-      for (let i = 0; i < stock.length; i++) {
-        let item = stock[i];
-        console.log(currentPath, item);
-        // 执行当前命中的路由方法
-        if (currentPath === item.path && item.method.indexOf(ctx.method) >= 0) {
-          route = item.middleware;
-          break;
-        }
+      let middleware;
+      const selectedRoute = stock.filter(item => currentPath === item.path && item.method.indexOf(ctx.method) >= 0);
+      console.log('selectedRoute', selectedRoute);
+      if (selectedRoute.length > 0) {
+        middleware = selectedRoute[0].middleware;
       }
+      // for (let i = 0; i < stock.length; i++) {
+      //   let item = stock[i];
+      //   console.log(currentPath, item);
+      //   // 执行当前命中的路由方法
+      //   if (currentPath === item.path && item.method.indexOf(ctx.method) >= 0) {
+      //     middleware = item.middleware;
+      //     break;
+      //   }
+      // }
 
-      if (typeof route === 'function') {
-        route(ctx, next);
+      if (typeof middleware === 'function') {
+        middleware(ctx, next);
         return;
       }
       // 若是中间件不合法 则直接转到下一个中间件

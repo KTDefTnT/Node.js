@@ -15,7 +15,6 @@ class Koa {
       const ctx = this.createContext(req, res);
       // await this.callback(ctx);
       // 中间件合成
-      console.log('middleware', this.middlewares);
       const fn = this.compoose(this.middlewares);
       // 执行合成函数并传入上下文
       await fn(ctx);

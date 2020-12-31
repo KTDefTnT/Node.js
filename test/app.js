@@ -1,6 +1,6 @@
 const Koa = require('../source/index');
-// const Router = require('../source/router');
-const Router = require('./router');
+const Router = require('../source/router');
+// const Router = require('./router');
 const app = new Koa();
 
 app.use((ctx, next) => {
