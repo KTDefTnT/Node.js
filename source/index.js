@@ -15,7 +15,7 @@ class Koa {
       const ctx = this.createContext(req, res);
       // await this.callback(ctx);
       // 中间件合成
-      const fn = this.compoose(this.middlewares);
+      const fn = this.compose(this.middlewares);
       // 执行合成函数并传入上下文
       await fn(ctx);
       // 响应
@@ -52,7 +52,7 @@ class Koa {
    * @param {*} middlewares 
    * @return 返回一个复合函数
    */
-  compoose (middlewares) {
+  compose (middlewares) {
     return function (ctx) {
       return dispatch(0);
       function dispatch(i) {
