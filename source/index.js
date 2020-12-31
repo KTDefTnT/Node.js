@@ -15,6 +15,7 @@ class Koa {
       const ctx = this.createContext(req, res);
       // await this.callback(ctx);
       // 中间件合成
+      console.log('middleware', this.middlewares);
       const fn = this.compoose(this.middlewares);
       // 执行合成函数并传入上下文
       await fn(ctx);
@@ -54,15 +55,15 @@ class Koa {
    */
   compoose (middlewares) {
     return function (ctx) {
-      return dispatch(ctx, 0);
-      function dispatch(context, i) {
+      return dispatch(0);
+      function dispatch(i) {
         const fn = middlewares[i];
         if (!fn) {
           return Promise.resolve();
         }
         return Promise.resolve(
-          fn(context, function next () {
-            return dispatch(context, i + 1)
+          fn(ctx, function next () {
+            return dispatch(i + 1);
           })
         );
       }

@@ -30,14 +30,12 @@ class Router {
   // app.use(router.routes()) routes()方法执行后应返回一个middleware，其有两个入参  ctx与next
   routes () {
     let stock = this.stack;
-    console.log('stock', stock);
     return async function (ctx, next) {
       let currentPath = ctx.url;
       let route;
-      console.log(currentPath, ctx.method);
       for (let i = 0; i < stock.length; i++) {
         let item = stock[i];
-        console.log(currentPath, ctx.method, item);
+        console.log(currentPath, item);
         // 执行当前命中的路由方法
         if (currentPath === item.path && item.method.indexOf(ctx.method) >= 0) {
           route = item.middleware;
