@@ -1,0 +1,25 @@
+{
+  "name": "nodelearn",
+  "version": "1.0.0",
+  "description": "1、cookie就是后端直接存入数据，感觉存入的数据也可以使用加密存入一个对应id  但是这个去鉴定的话，获取用户数据好像也要一个新的表？",
+  "main": "cookie.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KTDefTnT/nodeLearn.git"
+  },
+  "author": "焦糖瓜子 <1395110441@qq.com> (https://github.com/KTDefTnT)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KTDefTnT/nodeLearn/issues"
+  },
+  "homepage": "https://github.com/KTDefTnT/nodeLearn#readme",
+  "devDependencies": {
+    "koa": "^2.13.1"
+  },
+  "dependencies": {
+    "koa-session": "^6.1.0"
+  }
+}

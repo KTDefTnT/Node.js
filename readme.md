@@ -1,5 +1,7 @@
-1、cookie就是后端直接存入数据，感觉存入的数据也可以使用加密存入一个对应id  但是这个去鉴定的话，获取用户数据好像也要一个新的表？
-2、session的话就是把一些用户数据存储在服务器中(redis或者数据库中),然后将session_id塞入cookie中
+1、cookie就是后端直接存入数据，感觉存入的数据也可以使用加密存入一个对应id  但是这个去鉴定的话，获取用户数据好像也要一个新的表？  
+
+2、session的话就是把一些用户数据存储在服务器中(redis或者数据库中),然后将session_id塞入cookie中  
+
 3、token的话比较简单，header.payload.signature， 后端可以将一些数据预先塞入payload中，再通过后端的密钥去校验下signature的合法性   一些基本数据也可以直接从payload中获取，比如存储一个userid啥的 就不需要新的表或者其他方式去存储其他数据了
 
 其中差异还有就是存储位置的不一样，cookie存储在客户端， session就是将数据存储在服务器端， token的话 可以直接存入cookie里或者直接返回给前端，由前端自由选择存储cookie中或者localstorage里面 ；主要差异在于 token的话 即使浏览器或者其他端禁用cookie也可以使用
