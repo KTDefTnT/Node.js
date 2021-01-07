@@ -10,6 +10,7 @@ const http = require('http');
 var sessions = {}; 
 var sessionKey = 'session_id'; 
 var EXPIRES = 20 * 60 * 1000;
+const Big = require('big.js');
 
 var generate = function () {
   var session = {};
@@ -85,5 +86,8 @@ const app = http.createServer((req, res) => {
   };
   res.end(msg);
 });
+
+let sss = '213123.33';
+console.log(new Big(sss).div(10000).toNumber(), new Big(sss).div(10000).__proto__);
 
 app.listen(3031);
