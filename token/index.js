@@ -42,9 +42,7 @@ router.get( "/users/getUser-token",
   jwtAuth({ secret }),
   async ctx => { 
   // 验证通过，state.user 
-  const jwtxxx = await jwtAuth({ secret });
-  console.log(jwtxxx); 
-  console.log(ctx.state);
+  console.log(ctx);
   //获取session 
   ctx.body = {
     message: "获取数据成功",
