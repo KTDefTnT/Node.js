@@ -1,2 +1,2 @@
-.history
-node_modules
+./egg/node_modules
+./kgg/node_modules
