@@ -4,7 +4,8 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    const { ctx } = this;
+    const { ctx, app } = this;
+    console.log(app.middlewares.errorHandler());
     ctx.body = 'hi, egg';
   }
 }

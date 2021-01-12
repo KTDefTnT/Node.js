@@ -1,11 +1,15 @@
 const moment = require('moment')
 
 // 处理成功响应
-exports.success = ({ ctx, res = null, msg = '处理成功' }) => {
+/**
+ * 
+ * @param {*} helper 进行统一 
+ */
+exports.success = ({ ctx, res = null, message = '处理成功' }) => {
     ctx.body = {
         code: 0,
         data: res,
-        msg
+        errorMessage: message
     }
     ctx.status = 200
 }
