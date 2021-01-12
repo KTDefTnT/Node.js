@@ -16,6 +16,8 @@ class UserController extends Controller {
    */
   async create() {
     const { ctx } = this;
+    // 接口数据格式校验
+    ctx.validate(ctx.rule.createUserRequest, ctx.request.body);
     // 设置响应内容和响应状态码
     ctx.helper.success({ ctx, res: 'ajsdjhadada', message: '操作成功' });
   }

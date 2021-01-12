@@ -29,21 +29,22 @@
     c.Description.响应描述。
   ```
   * @Deprecated 接口未完成或不可使用
-> 其中type的自定义类型需要再  contract文件夹中进行声明，contract中可以直接使用其他定义好的数据类型
+    > 其中type的自定义类型需要再  contract文件夹中进行声明，contract中可以直接使用其他定义好的数据类型; 对每一条数据的校验 format字段支持正则判断
 
 - [x] 统一异常处理([异常处理](https://eggjs.org/zh-cn/core/error-handling.html))
-  * 异常处理中间件
+  * 异常处理中间件(error_handler)
   * 框架自带的 onerror 插件支持自定义配置错误处理方法(在// config/config.default.js中配置 onerror)
 ```
-// 框架通过 onerror 插件提供了统一的错误处理机制。对一个请求的所有处理方法（Middleware、Controller、Service）中抛出的任何异常都会被它捕获，并自动根据请求想要获取的类型返回不同类型的错误
+// 框架通过 onerror 插件提供了统一的错误处理机制。对一个请求的所有处理方法
+（Middleware、Controller、Service）中抛出的任何异常都会被它捕获，并自动根据请求想要获取的类型返回不同类型的错误
 ```
 - [x] 基于扩展的helper响应统⼀处理
 > 在extend扩展中进行扩展： `exports.success = ctx => ctx.body = '统一处理方式' `
-- [ ] Validate接⼝格式检查 [egg-validate](https://github.com/eggjs/egg-validate#readme) 使用`egg-swagger-doc-feat`配合`egg-validate` 
+- [x] Validate接⼝格式检查 [egg-validate](https://github.com/eggjs/egg-validate#readme) 使用`egg-swagger-doc-feat`配合`egg-validate` 
 ```
   /**
   * ctx.validate 为egg-validate插件挂载在ctx中的数据
-  * ctx.rule.createResource 为egg-swagger-doc-feat自定义的contract数据格式，支持传入数据进行正则校验
+  * ctx.rule.createResource 为egg-swagger-doc-feat自定义的contract数据格式，支持传入数据进行正则校验 format字段支持正则判断
   */
   ctx.validate(ctx.rule.createResource, ctx.request.body);
 ```

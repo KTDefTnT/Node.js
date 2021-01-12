@@ -49,7 +49,8 @@ module.exports = appInfo => {
 
   // add your middleware config here
   // 中间件统一异常处理： middleware必须转换为驼峰形式
-  config.middleware = [ 'errorHandler' ];
+  // config.middleware = [ 'errorHandler' ];
+  config.middleware = [];
   // 自定义统一异常处理
   config.onerror = {
     all(err, ctx) {
