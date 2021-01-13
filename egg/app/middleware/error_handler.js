@@ -13,18 +13,24 @@ module.exports = (options, app) => async (ctx, next) => {
     app.emit('error', err, this);
     const status = err.status || 500;
     // 从 error 对象上读出各个属性，设置到响应中
-    const error = status === 500 && app.env === 'prod' ?
+    let error = status === 500 && ctx.app.env === 'prod' ?
       'Internal Server Error' :
       err.message;
+    if (error.code === 'credentials_required') {
+      // credentials_required, jwt鉴权
+      error = '用户未登录或者登录超时，请重新登录！';
+    }
+    console.log('eerrr', error);
     ctx.body = {
       // 服务端⾃身的处理逻辑错误(包含框架错误500 及 ⾃定义业务逻辑错误533开始 ) 客户端请求参数导致的错误(4xx开始)，设置不同的状态码
-      code: status,
+      // code: status,
+      type: 'error',
       errorMessage: error,
     };
     // 422是什么错误？？？？
-    if (status === 422) {
-      ctx.body.detail = err.errors;
-    }
+    // if (status === 422) {
+    //   ctx.body.detail = err.errors;
+    // }
     ctx.status = 200;
     next();
   }

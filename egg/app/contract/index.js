@@ -5,8 +5,8 @@ module.exports = {
     id: { type: 'string', required: true, description: '用户id', example: '234ieiwyrew' },
   },
   baseResponse: {
-    code: { type: 'integer', required: true, example: 0 },
-    data: { type: 'string', example: [] },
+    type: { type: 'string', required: true, example: 'success' },
+    data: { type: 'string', example: '23423423' },
     errorMessage: { type: 'string', example: '请求成功' },
   },
 };

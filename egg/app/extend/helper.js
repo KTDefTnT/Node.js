@@ -3,11 +3,11 @@
 const moment = require('moment');
 
 // 统一成功处理
-exports.success = ({ ctx, res = null, msg = '处理成功', status = 200 }) => {
+exports.success = ({ ctx, res = '', type = 'success', message = '处理成功', status = 200 }) => {
   ctx.body = {
-    code: 0,
+    type,
     data: res,
-    errorMessage: msg,
+    errorMessage: message,
   };
   ctx.status = status;
 };
