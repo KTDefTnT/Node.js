@@ -4,7 +4,7 @@ const Controller = require('egg').Controller;
 // a.如果文件第一个注释块中存在标签@Controller，应用会扫描当前文件下的所有注释块，否则扫描将会跳过该文件。
 // b.如果不标示ControllerName，程序会将当前文件的文件名作为ControllerName。
 /**
- * @Controller user
+ * @Controller 用户相关
  */
 class UserController extends Controller {
   /**
