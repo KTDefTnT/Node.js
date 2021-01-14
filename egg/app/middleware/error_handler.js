@@ -25,7 +25,7 @@ module.exports = (options, app) => async (ctx, next) => {
       // 服务端⾃身的处理逻辑错误(包含框架错误500 及 ⾃定义业务逻辑错误533开始 ) 客户端请求参数导致的错误(4xx开始)，设置不同的状态码
       // code: status,
       type: 'error',
-      errorMessage: error,
+      message: error,
     };
     // 422是什么错误？？？？
     // if (status === 422) {

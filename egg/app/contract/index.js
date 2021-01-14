@@ -6,7 +6,7 @@ module.exports = {
   },
   baseResponse: {
     type: { type: 'string', required: true, example: 'success' },
-    data: { type: 'string', example: '23423423' },
-    errorMessage: { type: 'string', example: '请求成功' },
+    data: { type: 'array', itemType: 'string', example: '23423423' },
+    message: { type: 'string', example: '请求成功' },
   },
 };

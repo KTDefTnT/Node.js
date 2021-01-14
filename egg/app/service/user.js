@@ -24,8 +24,36 @@ class UserService extends Service {
         password,
       });
       resopnseData.type = 'success';
+      resopnseData.message = '用户注册成功！';
     }
     return resopnseData;
+  }
+
+  /**
+   * 根据用户id查询用户信息
+   * @param {*} id 用户id
+   */
+  async getUserInfoById(id) {
+    const { ctx } = this;
+    const respData = await ctx.model.User.findOne({ _id: id });
+    if (respData) {
+      return { data: respData, type: 'success', message: '用户信息查询成功！' };
+    }
+    return { data: {}, type: 'error', message: '当前用户信息有误' };
+  }
+
+  /**
+   * 根据分页信息获取用户列表
+   * @param {*} payload pageSize，pageNum，searchValue
+   */
+  async getUserList(payload) {
+    const { ctx } = this;
+    const { pageSize = 10, pageNo = 1 } = payload;
+    const total = await ctx.model.User.count();
+    const respData = await ctx.model.User.find()
+      .limit(pageSize)
+      .skip(pageSize * (pageNo - 1));
+    return { data: respData, total , type: 'success', message: '查询成功' };
   }
 }
 

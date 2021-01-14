@@ -55,7 +55,7 @@
       * 校验、组装参数。
       * 调用 Service 进行业务处理，必要时处理转换 Service 的返回结果，让它适应用户的需求。
       * 通过 HTTP 将结果响应给用户。
-    - [ ] request请求： get使用 ctx.request.query获取数据;post ctx.request.body无法获取到数据？
+    - [x] request请求： get使用 ctx.request.query获取数据;post ctx.request.body获取到数据
   * service层
     简单来说，Service 就是在复杂业务场景下用于做业务逻辑封装的一个抽象层，提供这个抽象有以下几个好处：
       * 保持 Controller 中的逻辑更加简洁。
@@ -72,9 +72,6 @@
 - [ ] 文件上传
 
 
-## 存在的问题
-1、统一错误处理 onerror与中间件无法响应request 导致接口一直挂起，但是node后台可看到报错信息
-2、post请求无法获取到body数据
 ## QuickStart
 
 <!-- add docs here for user -->

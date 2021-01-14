@@ -70,7 +70,7 @@ module.exports = appInfo => {
     all(err, ctx) {
       // 所有的异常都在 app 上触发⼀个 error 事件，框架会记录⼀条错误⽇志
       ctx.app.emit('error', err, this);
-      console.log('all33333', err.message);
+      console.log('all33333', err);
       const status = err.status || 500;
       // 从 error 对象上读出各个属性，设置到响应中
       let error = status === 500 && ctx.app.env === 'prod' ?
@@ -91,7 +91,7 @@ module.exports = appInfo => {
       //   ctx.body.detail = err.errors;
       // }
       ctx.status = 200;
-      ctx.helper.success({ ctx, res: '', type: 'error', message: error, status });
+      ctx.helper.success({ ctx, data: '', type: 'error', message: error, status });
     },
   };
 

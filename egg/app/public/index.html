@@ -21,14 +21,14 @@
         <div><a href="/swagger-ui.html">SwaggerUI</a></div>
         <div><a href="https://www.easy-mock.com/project/5ce3669a733e8967c7b2e902">EasyMock地址</a></div>
         <div>
-            <el-button @click="create">创建用户</el-button>
-            <el-button @click="list">用户列表</el-button>
+            <el-button @click="register">注册用户</el-button>
+            <el-button @click="getList">用户列表</el-button>
             <el-button @click="del">删除用户</el-button>
         </div>
         <div>
             <el-button @click="login">登入</el-button>
             <el-button @click="logout">退出登录</el-button>
-            <el-button @click="getUserList">用户列表</el-button>
+            <el-button @click="getUserInfo">用户信息</el-button>
         </div>
         <div>
             <el-button onclick="document.getElementById('log').innerHTML = ''">Clear Log</el-button>
@@ -62,19 +62,22 @@
             el: '#app',
             data: {
                 value: 'input',
-                token: {}
+                token: '',
+                list: []
             },
             methods: {
-                async create() {
-                    await axios.post('/api/user', {
+                async register() {
+                    await axios.post('/register', {
                         mobile: '13611388415',
                         password: '111111',
-                        realName: '老夏',
+                        username: '老夏',
                     })
                 },
-                async list() {
-                    const res = await axios.get('/api/user')
-                    this.list = res.data.data.list
+                async getList() {
+                  console.log('asdajksgdakjdgaj');
+                    const res = await axios.post('/api/user/getUserList', { pageSize: 10, pageNo: 1 });
+                    console.log('resp', res);
+                    this.list = res.data.data
                 },
                 async del() {
                     console.log('list', this.list)
@@ -83,18 +86,19 @@
                     })
                 },
                 async login() {
-                    const res = await axios.post('/auth/jwt/login', {
-                        mobile: '13611388415',
-                        password: '111111'
+                    const res = await axios.post('/auth/login', {
+                        mobile: '15566626668',
+                        password: '123456'
                     })
-                    localStorage.setItem("token", res.data.data.token);
+                    console.log('xxxx', res.data.data);
+                    localStorage.setItem("token", res.data.data);
                 },
                 async logout() {
-                    const res = await axios.post('/auth/jwt/logout')
+                    const res = await axios.post('/auth/logout')
                     localStorage.removeItem("token");
                 },
-                async getUserList() {
-                    await axios.get('/api/user')
+                async getUserInfo() {
+                    await axios.get(`/api/user/getUserInfoById?id=12312313`)
                 }
             },
             mounted: function () {},
