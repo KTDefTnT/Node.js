@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./eventEmitter.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var event1 = new EventEmitter();
+    // const EventEmitter1 = require('./eventEmitter');
+
+    event1.on('connect', (payload) => {
+      console.log('xxxx', payload);
+    });
+
+    setInterval(() => {
+      event1.emit('connect', '参数1', '参数2');
+    }, 2000);
+
+    console.log('EventEmitter', event1);
+  </script>
+</body>
+</html>
