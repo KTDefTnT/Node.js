@@ -20,6 +20,7 @@
     "koa": "^2.13.1"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "big.js": "^6.0.3",
     "co-redis": "^2.1.1",
     "jsonwebtoken": "^8.5.1",
