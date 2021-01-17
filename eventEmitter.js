@@ -71,9 +71,10 @@ EventEmitter.prototype.removeListener = function (event, listener) {
  * 	once(event, listener) 为指定事件注册一个单次监听器，即 监听器最多只会触发一次，触发后立刻解除该监听器。
  */
 EventEmitter.prototype.once = function (event, listener) {
+  let self = this;
   function fn () {
     var args = Array.prototype.slice.call(arguments);
-    listener.apply(null, args); // ????
+    listener.apply(null, args); // 执行监听事件函数
     self.removeListener(event, fn);
   }
   this.on(event, fn);
@@ -104,4 +105,3 @@ EventEmitter.prototype.listeners = function (event) {
   return this.listeners[event];
 }
 
-// modexports = EventEmitter;

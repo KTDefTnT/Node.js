@@ -3,23 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="./eventEmitter.js"></script>
+  <!-- <script src="./eventEmitter.js"></script> -->
+  <!-- <script src="./eventEmitterClass.js"></script> -->
+  <script src="./eventEmitterGit.js"></script>
   <title>Document</title>
 </head>
 <body>
   <script>
+    console.log(this);
     var event1 = new EventEmitter();
-    // const EventEmitter1 = require('./eventEmitter');
+    // // const EventEmitter1 = require('./eventEmitter');
 
-    event1.on('connect', (payload) => {
-      console.log('xxxx', payload);
+    event1.on('connect', function once (...payload) {
+      console.log('出发咯', payload);
     });
+
+    // event1.once('connect', (...payload) => {
+    //   console.log('222', payload);
+    // });
 
     setInterval(() => {
       event1.emit('connect', '参数1', '参数2');
-    }, 2000);
+    }, 1000);
 
-    console.log('EventEmitter', event1);
+    setTimeout(() => {
+      event1.removeListener('connect', 'once');
+    }, 5000);
+
+    // function name () {
+    //   console.log('name');
+    // }
+    // var obj = {
+    //   once: true,
+    //   listener: name
+    // }
+
+    // console.log(name === obj.listener);
+    // console.log('EventEmitter', event1);
   </script>
 </body>
 </html>
