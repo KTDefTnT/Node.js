@@ -25,12 +25,7 @@ function functionDecorator() {
   // 装饰器函数
   return function (target: any, property: string, descriptor) {
     console.log('方法装饰器');
-    console.log('descriptor', descriptor);
-    var originFn = descriptor.value;
-    descriptor.value = name => {
-      const newName = `[${name}]`;
-      originFn.call(null, newName);
-    }
+    console.log(target.prototype);
     // console.log('function', target);
     // 对sayHi进行加工
     // let originFunc = target[property]; // 原始函数
@@ -46,6 +41,7 @@ function functionDecorator() {
 function configurableDecrator () {
   return function (target: any, property: string, descriptor) {
     console.log('访问器装饰器');
+    console.log('访问器装饰器configurableDecrator', target, property);
   }
 }
 /**
@@ -57,8 +53,11 @@ function configurableDecrator () {
  */
  function propertyDecorator (value) {
    return function (target, property) {
-    console.log('属性装饰器', target[property]);
-    target[property] = value;
+    console.log('属性装饰器');
+     console.log('target', target, property);
+    const message = `${value}-${target[property]}`;
+    console.log('propertyDecorator', message);
+    target[property] = message;
     // return message;
    }
  }
@@ -66,7 +65,7 @@ function configurableDecrator () {
 
 // @classDecorator
 export default class Greeter {
-  // @propertyDecorator('Nickloas')
+  @propertyDecorator('Nickloas')
   name: string;
   hello: string;
   constructor(message: string) {
@@ -74,8 +73,8 @@ export default class Greeter {
   }
 
   // @functionDecorator()
-  sayHi(name) {
-    console.log( "Hello, "  + name);
+  sayHi() {
+    console.log( "Hello, " + this.hello);
   }
 
   // @configurableDecrator()

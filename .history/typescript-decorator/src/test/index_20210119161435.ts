@@ -66,19 +66,19 @@ function configurableDecrator () {
 
 // @classDecorator
 export default class Greeter {
-  // @propertyDecorator('Nickloas')
+  @propertyDecorator('Nickloas')
   name: string;
   hello: string;
   constructor(message: string) {
     this.hello = message;
   }
 
-  // @functionDecorator()
+  @functionDecorator()
   sayHi(name) {
     console.log( "Hello, "  + name);
   }
 
-  // @configurableDecrator()
+  @configurableDecrator()
   get getHello() {
     return this.hello;
   }

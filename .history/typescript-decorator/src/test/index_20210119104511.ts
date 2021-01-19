@@ -29,6 +29,7 @@ function functionDecorator() {
     var originFn = descriptor.value;
     descriptor.value = name => {
       const newName = `[${name}]`;
+      console.log('this', this, newName);
       originFn.call(null, newName);
     }
     // console.log('function', target);
@@ -57,7 +58,7 @@ function configurableDecrator () {
  */
  function propertyDecorator (value) {
    return function (target, property) {
-    console.log('属性装饰器', target[property]);
+    console.log('属性装饰器');
     target[property] = value;
     // return message;
    }
@@ -66,19 +67,19 @@ function configurableDecrator () {
 
 // @classDecorator
 export default class Greeter {
-  // @propertyDecorator('Nickloas')
+  @propertyDecorator('Nickloas')
   name: string;
   hello: string;
   constructor(message: string) {
     this.hello = message;
   }
 
-  // @functionDecorator()
+  @functionDecorator()
   sayHi(name) {
     console.log( "Hello, "  + name);
   }
 
-  // @configurableDecrator()
+  @configurableDecrator()
   get getHello() {
     return this.hello;
   }

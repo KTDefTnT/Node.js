@@ -1,7 +1,6 @@
 // 类装饰器 类装饰器表达式会在运行时当作函数被调用，类的构造函数作为其唯一的参数
 // 类装饰器在类声明之前被声明（紧靠着类声明）。 类装饰器应用于类构造函数，可以用来监视，修改或替换类定义
 function classDecorator <T extends {new(...args:any[]):{}}>(constructor:T) {
-  console.log('类装饰器');
   return class extends constructor {
     newProperty = "new property";
     hello = "override";
@@ -24,13 +23,7 @@ function functionDecorator() {
   // console.log('functionDecorator', this);
   // 装饰器函数
   return function (target: any, property: string, descriptor) {
-    console.log('方法装饰器');
-    console.log('descriptor', descriptor);
-    var originFn = descriptor.value;
-    descriptor.value = name => {
-      const newName = `[${name}]`;
-      originFn.call(null, newName);
-    }
+    console.log(target.prototype);
     // console.log('function', target);
     // 对sayHi进行加工
     // let originFunc = target[property]; // 原始函数
@@ -45,7 +38,7 @@ function functionDecorator() {
  */
 function configurableDecrator () {
   return function (target: any, property: string, descriptor) {
-    console.log('访问器装饰器');
+    console.log('访问器装饰器configurableDecrator', target, property);
   }
 }
 /**
@@ -57,7 +50,9 @@ function configurableDecrator () {
  */
  function propertyDecorator (value) {
    return function (target, property) {
-    console.log('属性装饰器', target[property]);
+     console.log('target', target, property);
+    const message = `${value}-${target[property]}`;
+    console.log('propertyDecorator', message);
     target[property] = value;
     // return message;
    }
@@ -67,15 +62,15 @@ function configurableDecrator () {
 // @classDecorator
 export default class Greeter {
   // @propertyDecorator('Nickloas')
-  name: string;
+  name = "property";
   hello: string;
   constructor(message: string) {
     this.hello = message;
   }
 
-  // @functionDecorator()
-  sayHi(name) {
-    console.log( "Hello, "  + name);
+  @functionDecorator()
+  sayHi() {
+    console.log( "Hello, " + this.hello);
   }
 
   // @configurableDecrator()

@@ -3,7 +3,6 @@ import * as glob from 'glob';
 import * as KoaRouter from 'koa-router';
 
 const router = new KoaRouter();
-type HTTPMethod = 'get' | 'put' | 'del' | 'post' | 'patch';
 type LoadOptions = {  
   /**     * 路由文件扩展名，默认值是`.{js,ts}`     */
   extname?: string;
@@ -19,7 +18,7 @@ type RouteOptions = {
   middlewares?: Array<Koa.Middleware>;
 };
 
-const decorate = (method: HTTPMethod, path: string, router: KoaRouter, options?: RouteOptions) => {
+const decorate = (method, path: string, router: KoaRouter, options?: RouteOptions) => {
   // target 类，property 修饰的属性或方法  descriptor 描述,defineProperty()
   return (target, property, descriptor) => {
     const url = options && options.prefix ? options.prefix + path : path;
@@ -32,7 +31,7 @@ const decorate = (method: HTTPMethod, path: string, router: KoaRouter, options?:
 }
 
 // router强绑定 不利于扩展
-const method = method => (path: string, options?: RouteOptions) => decorate(method, path, router, options);
+const method = method => (path: string, options?: RouteOptions) => decorate(method, path, options, router);
 
 // export const post = (path: string, options?: RouteOptions) => { 
 //   return (target, property, descriptor) => {
@@ -46,7 +45,7 @@ const method = method => (path: string, options?: RouteOptions) => decorate(meth
 
 export const get = method('get');
 export const post = method('post');
-export const del = method('del');
+export const update = method('update');
 export const put = method('put');
 
 

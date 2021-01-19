@@ -26,10 +26,11 @@ function functionDecorator() {
   return function (target: any, property: string, descriptor) {
     console.log('方法装饰器');
     console.log('descriptor', descriptor);
-    var originFn = descriptor.value;
     descriptor.value = name => {
+      // var originFn = descriptor.value;
       const newName = `[${name}]`;
-      originFn.call(null, newName);
+      console.log('this', this, newName);
+      // originFn.call(null, newName);
     }
     // console.log('function', target);
     // 对sayHi进行加工
@@ -57,7 +58,7 @@ function configurableDecrator () {
  */
  function propertyDecorator (value) {
    return function (target, property) {
-    console.log('属性装饰器', target[property]);
+    console.log('属性装饰器');
     target[property] = value;
     // return message;
    }
@@ -66,19 +67,19 @@ function configurableDecrator () {
 
 // @classDecorator
 export default class Greeter {
-  // @propertyDecorator('Nickloas')
+  @propertyDecorator('Nickloas')
   name: string;
   hello: string;
   constructor(message: string) {
     this.hello = message;
   }
 
-  // @functionDecorator()
+  @functionDecorator()
   sayHi(name) {
     console.log( "Hello, "  + name);
   }
 
-  // @configurableDecrator()
+  @configurableDecrator()
   get getHello() {
     return this.hello;
   }
